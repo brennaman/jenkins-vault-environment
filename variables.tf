@@ -6,6 +6,7 @@ variable "client_certificate_password" {}
 variable "jenkins_data_storage_acct" {}
 variable "jenkins_data_storage_acct_key" {}
 variable "jenkins_data_storage_acct_share" {}
+variable "vault_data_storage_acct_share" {}
 
 variable "azure_environment" {
   default = "public"

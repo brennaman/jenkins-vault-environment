@@ -38,6 +38,26 @@ resource "azurerm_container_group" "container-grp" {
       storage_account_key   = "${var.jenkins_data_storage_acct_key}"
       share_name            = "${var.jenkins_data_storage_acct_share}"
     }
+  }
+
+  container {
+    name   = "vault"
+    image  = "brennaman3/vault:latest"
+    cpu    = "1"
+    memory = "1"
+
+    ports {
+      port     = 8200
+      protocol = "TCP"
+    }
+
+    volume{
+      name                  = "vaultvol1"
+      mount_path            = "/vault"
+      storage_account_name  = "${var.jenkins_data_storage_acct}"
+      storage_account_key   = "${var.jenkins_data_storage_acct_key}"
+      share_name            = "${var.vault_data_storage_acct_share}"
+    }
    
   }
 
@@ -45,3 +65,4 @@ resource "azurerm_container_group" "container-grp" {
     environment = "${var.environment}"
   }
 }
+
